@@ -1,0 +1,67 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-merge-conflict
+      - id: check-executables-have-shebangs
+      - id: check-shebang-scripts-are-executable
+      - id: mixed-line-ending
+        args: [--fix=lf]
+
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.10.0.1
+    hooks:
+      - id: shellcheck
+
+  - repo: https://github.com/scop/pre-commit-shfmt
+    rev: v3.10.0-2
+    hooks:
+      - id: shfmt
+        args: [-i, "4", -ci, -bn, -w]
+
+  - repo: https://github.com/DavidAnson/markdownlint-cli2
+    rev: v0.14.0
+    hooks:
+      - id: markdownlint-cli2
+        # Skip vendored skill bodies — author content varies wildly and isn't
+        # worth enforcing prose rules on. We lint repo-level docs only.
+        files: ^(README\.md|CLAUDE\.md|\.claude/reference/[^/]+\.md)$
+
+  - repo: local
+    hooks:
+      - id: validate-skill-frontmatter
+        name: Validate SKILL.md frontmatter
+        entry: scripts/validate-skill-frontmatter.sh
+        language: system
+        files: ^skills/[^/]+/[^/]+/SKILL\.md$
+        pass_filenames: true
+
+      - id: check-md-wrap
+        name: Check markdown prose is not hard-wrapped
+        entry: scripts/check-md-wrap.sh
+        language: system
+        files: ^(README\.md|CLAUDE\.md|\.claude/reference/[^/]+\.md|skills/[^/]+/[^/]+/SKILL\.md)$
+        pass_filenames: true
+
+      - id: eslint-packages
+        name: ESLint (packages/)
+        entry: scripts/run-in-packages.sh lint
+        language: system
+        files: ^packages/.*\.tsx?$
+        pass_filenames: false
+
+      - id: prettier-check-packages
+        name: Prettier check (packages/)
+        entry: bunx prettier --check "packages/**/*.ts"
+        language: system
+        files: ^packages/.*\.tsx?$
+        pass_filenames: false
+
+      - id: typecheck-packages
+        name: TypeScript typecheck (packages/)
+        entry: scripts/run-in-packages.sh typecheck
+        language: system
+        files: ^packages/.*\.tsx?$
+        pass_filenames: false

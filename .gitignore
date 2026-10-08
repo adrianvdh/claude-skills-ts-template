@@ -1,0 +1,22 @@
+.DS_Store
+*.swp
+*~
+.idea/
+node_modules/
+
+# Compiled per-package binaries + TS build intermediates (built via setup.sh / bun run build:binary)
+packages/*/dist/
+packages/*/dist-tsc/
+bun.lockb
+
+# bun build/compile leaves hidden hash-named intermediate files like
+# .18dc81af5abafe7a-00000000.bun-build directly in the package directory
+# (not under dist/) — catch them wherever they land, not just under packages/*.
+*.bun-build
+*.tsbuildinfo
+coverage/
+
+# Local Claude Code working directory (plans/state) — not part of the repo,
+# except reference/ which holds committed authoring rules
+.claude/*
+!.claude/reference/

@@ -1,0 +1,5 @@
+# Treat all scripts as bash (we use bash-specific features like local + arrays).
+shell=bash
+
+# Follow `source` directives so symlink-skills.sh is checked alongside its callers.
+external-sources=true

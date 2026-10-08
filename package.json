@@ -1,0 +1,23 @@
+{
+    "private": true,
+    "workspaces": ["skills/*/*", "packages/*", "tooling/*"],
+    "scripts": {
+        "lint": "scripts/run-in-packages.sh lint",
+        "typecheck": "scripts/run-in-packages.sh typecheck",
+        "format": "prettier --write \"packages/**/*.ts\"",
+        "format:check": "prettier --check \"packages/**/*.ts\"",
+        "test": "bun test",
+        "precommit:install": "pre-commit install",
+        "precommit": "pre-commit run --all-files",
+        "setup": "./setup.sh",
+        "uninstall": "./uninstall.sh"
+    },
+    "devDependencies": {
+        "@types/bun": "^1.1.0",
+        "@types/node": "^20",
+        "eslint": "^9.0.0",
+        "prettier": "^3.0.0",
+        "tooling-prettier-config": "workspace:*",
+        "typescript": "^5.5"
+    }
+}

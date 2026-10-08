@@ -1,0 +1,19 @@
+{
+    "name": "text-stats-binary",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "lint": "eslint .",
+        "typecheck": "tsc --noEmit",
+        "test": "bun test",
+        "build:binary": "./scripts/build-binary.sh"
+    },
+    "dependencies": {
+        "text-stats-shared": "workspace:*"
+    },
+    "devDependencies": {
+        "tooling-eslint-config": "workspace:*",
+        "tooling-tsconfig": "workspace:*"
+    }
+}

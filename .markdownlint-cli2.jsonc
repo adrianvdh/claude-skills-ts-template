@@ -1,0 +1,14 @@
+{
+    "config": {
+        "default": true,
+        // Prose lines aren't bound to a column — let tables and long sentences flow.
+        "MD013": false,
+        // Inline HTML shows up in skill descriptions and table cells.
+        "MD033": false,
+        // Bare URLs are fine in install instructions.
+        "MD034": false,
+        // Allow duplicate headings across sections (e.g. "## Process" in many SKILL.md files).
+        "MD024": { "siblings_only": true }
+    },
+    "ignores": ["skills/**/legacy/**", "node_modules/**"]
+}
